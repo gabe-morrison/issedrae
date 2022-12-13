@@ -1,23 +1,21 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const EditorCanvas = () => {
   const [fileLoaded, setFileLoaded] = useState(false);
-  const [file, setFile] = useState(undefined);
+  const [file, setFile] = useState<string>();
 
-  const handleUpload = (e) => {
-    setFileLoaded(true);
-    setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
-    const reader = new FileReader();
-    // URL.createObjectURL(file);
+  const handleChange = (e) => {
+    const test = URL.createObjectURL(e.target.files[0]);
+    setFile(test);
+
   }
   return (
     <div>
-      {fileLoaded 
+      {file
         ? <img src={file} alt='User-uploaded map.'/>
         : <input 
           type='file' 
-          onChange={(e) => handleUpload(e)}
+          onChange={(e) => handleChange(e)}
       />}
     </div>
   ) 
